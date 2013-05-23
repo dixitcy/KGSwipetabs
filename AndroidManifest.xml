@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Imgact"></activity>
+       <activity android:name="com.dcy.kandg.Imgact"></activity>
     </application>
 
 </manifest>

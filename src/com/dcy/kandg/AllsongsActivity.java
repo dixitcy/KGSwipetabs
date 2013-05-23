@@ -1,7 +1,10 @@
 package com.dcy.kandg;
 
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,18 +13,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
-
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TabHost.OnTabChangeListener;
 
-public class AllsongsActivity extends FragmentActivity {
+public class AllsongsActivity extends FragmentActivity implements
+		ActionBar.TabListener {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -50,6 +55,9 @@ public class AllsongsActivity extends FragmentActivity {
 
 		// Set up action bar.
 		final ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setDisplayShowTitleEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(true);
 
 		// Specify that the Home button should show an "Up" caret, indicating
 		// that touching the
@@ -59,14 +67,48 @@ public class AllsongsActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager
+				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						// When swiping between different app sections, select
+						// the corresponding tab.
+						// We can also use ActionBar.Tab#select() to do this if
+						// we have a reference to the
+						// Tab.
+						actionBar.setSelectedNavigationItem(position);
+					}
+				});
+		// For each of the sections in the app, add a tab to the action bar.
+		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+			// Create a tab with text corresponding to the page title defined by
+			// the adapter.
+			// Also specify this Activity object, which implements the
+			// TabListener interface, as the
+			// listener for when this tab is selected.
+			actionBar.addTab(actionBar.newTab()
+					.setText(mSectionsPagerAdapter.getPageTitle(i))
+					.setTabListener(this));
+		}
+	}
+
+	@Override
+	public void onTabReselected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.allsongs, menu);
-		return true;
+	public void onTabSelected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
+		 mViewPager.setCurrentItem(tab.getPosition());
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onTabUnselected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
+		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -99,10 +141,20 @@ public class AllsongsActivity extends FragmentActivity {
 		}
 
 		@Override
+		public float getPageWidth(int position) {
+
+			return super.getPageWidth(position);
+		}
+
+		@Override
 		public int getCount() {
 			// Show 3 total pages.
 			return NUM_ITEMS;
 		}
+
+		// public CharSequence getPageTitle(int position) {
+		// return "Page " + (position + 1);
+		// }
 
 		@Override
 		public CharSequence getPageTitle(int position) {
@@ -131,11 +183,11 @@ public class AllsongsActivity extends FragmentActivity {
 	public static class TabFragment extends Fragment {
 
 		public static final String ARG_OBJECT = "object";
+
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -158,7 +210,7 @@ public class AllsongsActivity extends FragmentActivity {
 			View rootView = inflater.inflate(tabLayout, container, false);
 			GridView gridView = (GridView) rootView.findViewById(R.id.gridview);
 
-			gridView.setAdapter(new MYadapter(rootView.getContext()));
+			gridView.setAdapter(new MYadapterexprmnt(rootView.getContext()));
 			gridView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override

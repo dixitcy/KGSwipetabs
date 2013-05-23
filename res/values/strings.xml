@@ -12,5 +12,6 @@
     <string name="label1">POPULAR</string>
     <string name="label2">ALL SONGS</string>
     <string name="label3">TRENDING</string>
+    <string name="servicemsg">My developer is so lazy :(</string>
 
 </resources>
