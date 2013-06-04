@@ -37,6 +37,7 @@ public class MYadapterexprmnt extends BaseAdapter {
 		items.add(new Item("", R.drawable.pic_4));
 		items.add(new Item("", R.drawable.pic_5));
 		items.add(new Item("", R.drawable.pic_7));
+		
 	}
 
 	@Override

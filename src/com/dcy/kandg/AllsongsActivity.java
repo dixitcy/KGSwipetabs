@@ -1,21 +1,15 @@
 package com.dcy.kandg;
 
-import com.dcy.kandg.R.drawable;
-
-import android.R.color;
 import android.app.ActionBar;
-import android.app.ActionBar.LayoutParams;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Color;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
 import android.support.v4.view.ViewPager;
 
@@ -26,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
-
 
 public class AllsongsActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -40,13 +33,11 @@ public class AllsongsActivity extends FragmentActivity implements
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
-	
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,22 +54,16 @@ public class AllsongsActivity extends FragmentActivity implements
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowHomeEnabled(true);
-		
-		
-		
-	
-	
 
 		// Specify that the Home button should show an "Up" caret, indicating
 		// that touching the
 		// button will take the user one step up in the application's hierarchy.
-		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		
+
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		
+
 		mViewPager
 				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
@@ -89,9 +74,7 @@ public class AllsongsActivity extends FragmentActivity implements
 						// we have a reference to the
 						// Tab.
 						actionBar.setSelectedNavigationItem(position);
-						
-						
-						
+
 					}
 				});
 		// For each of the sections in the app, add a tab to the action bar.
@@ -103,12 +86,9 @@ public class AllsongsActivity extends FragmentActivity implements
 			// listener for when this tab is selected.
 			actionBar.addTab(actionBar.newTab()
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					
-					
-				
 
 					.setTabListener(this));
-					
+
 		}
 	}
 
@@ -122,12 +102,15 @@ public class AllsongsActivity extends FragmentActivity implements
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 		mViewPager.setCurrentItem(tab.getPosition());
+		
 
 	}
 
 	@Override
 	public void onTabUnselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
+
+	
 
 	}
 
@@ -212,6 +195,7 @@ public class AllsongsActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+
 			Bundle args = getArguments();
 			int position = args.getInt(ARG_OBJECT);
 
@@ -239,7 +223,7 @@ public class AllsongsActivity extends FragmentActivity implements
 
 					// Sending image id to FullScreenActivity
 					Intent i = new Intent(getActivity().getBaseContext(),
-							Imgact.class);
+							PlayerViewActivity.class);
 					// passing array index
 					i.putExtra("id", position);
 					startActivity(i);
@@ -253,5 +237,3 @@ public class AllsongsActivity extends FragmentActivity implements
 	}
 
 }
-
-
